@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabulka z JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 1em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+    th, td {
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Načtená data (vložený JSON)</h2>
+  <table id="data-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // Vnořený JSON
+    const data = [
+      { "Jméno": "Jan", "Příjmení": "Novák", "Věk": 35 },
+      { "Jméno": "Eva", "Příjmení": "Svobodová", "Věk": 29 },
+      { "Jméno": "Petr", "Příjmení": "Dvořák", "Věk": 42 }
+    ];
+
+    const table = document.getElementById('data-table');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+
+    if (data.length === 0) {
+      thead.innerHTML = '<tr><th>Žádná data</th></tr>';
+    } else {
+      const headers = Object.keys(data[0]);
+      thead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+      tbody.innerHTML = data.map(row =>
+        '<tr>' + headers.map(h => `<td>${row[h]}</td>`).join('') + '</tr>'
+      ).join('');
+    }
+  </script>
+</body>
+</html>
